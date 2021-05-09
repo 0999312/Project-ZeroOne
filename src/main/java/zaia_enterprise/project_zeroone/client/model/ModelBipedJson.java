@@ -32,15 +32,15 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
     /**
      * 存储 ModelRender 子模型的 HashMap
      */
-    private final HashMap<String, ModelRenderer> modelMap = Maps.newHashMap();
+    protected final HashMap<String, ModelRenderer> modelMap = Maps.newHashMap();
     /**
      * 存储 Bones 的 HashMap，主要是给后面寻找父骨骼进行坐标转换用的
      */
-    private final HashMap<String, BonesItem> indexBones = Maps.newHashMap();
+    protected final HashMap<String, BonesItem> indexBones = Maps.newHashMap();
     /**
      * 哪些模型需要渲染。加载进父骨骼的子骨骼是不需要渲染的
      */
-    private final List<ModelRenderer> shouldRender = Lists.newLinkedList();
+    protected final List<ModelRenderer> shouldRender = Lists.newLinkedList();
 
     public ModelBipedJson(CustomModelPOJO pojo) {
     	super(1F);
@@ -101,6 +101,7 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
             getShouldRender().add(this.leftArm);
             getShouldRender().add(this.rightLeg);
             getShouldRender().add(this.leftLeg);
+            
             // Null 检查，进行父骨骼绑定，Biped模型需要绑定ModelBiped的模型，位置硬编码
             // 放过我愚蠢的else-if吧——射命丸
             if (parent != null) {

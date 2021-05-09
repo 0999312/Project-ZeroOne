@@ -21,10 +21,10 @@ public class ArmorTest extends ArmorItem {
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
 			EquipmentSlotType armorSlot, A _default) {
 		
-		return (A) ClientUtil.getModelBipedFromJSON(new ResourceLocation("project_zeroone", "models/entity/alice_margatroid.json"));
+		return (A) ClientUtil.getArmorModelFromJSON(new ResourceLocation("project_zeroone", "models/entity/test_armor.json"));
 	}
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-		return "project_zeroone:textures/armor/alice_margatroid.png";
+		return "project_zeroone:textures/armor/test_armor.png";
 	}
 }

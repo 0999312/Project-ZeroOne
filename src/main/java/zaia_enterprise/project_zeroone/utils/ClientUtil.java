@@ -21,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import zaia_enterprise.project_zeroone.Main;
+import zaia_enterprise.project_zeroone.client.model.ModelArmorJson;
 import zaia_enterprise.project_zeroone.client.model.ModelBaseJson;
 import zaia_enterprise.project_zeroone.client.model.ModelBipedJson;
 import zaia_enterprise.project_zeroone.client.model.pojo.CustomModelPOJO;
@@ -80,6 +81,16 @@ public class ClientUtil {
 			if (model_cache.getIfPresent(modelLocation) instanceof BipedModel)
 				return (BipedModel<?>) model_cache.getIfPresent(modelLocation);
 		BipedModel<LivingEntity> model = new ModelBipedJson(loadModel(modelLocation));
+		model_cache.put(modelLocation, model);
+		return model;
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	public static BipedModel<?> getArmorModelFromJSON(ResourceLocation modelLocation) {
+		if (model_cache.getIfPresent(modelLocation) != null)
+			if (model_cache.getIfPresent(modelLocation) instanceof ModelArmorJson)
+				return (BipedModel<?>) model_cache.getIfPresent(modelLocation);
+		ModelArmorJson model = new ModelArmorJson(loadModel(modelLocation));
 		model_cache.put(modelLocation, model);
 		return model;
 	}
