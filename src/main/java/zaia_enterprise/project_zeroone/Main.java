@@ -13,6 +13,8 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import zaia_enterprise.project_zeroone.item.ItemRegister;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,6 +38,8 @@ public class Main {
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
+		
+		ItemRegister.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
@@ -81,5 +85,10 @@ public class Main {
 			// register a new block here
 			LOGGER.info("HELLO from Register Block");
 		}
+	}
+
+	public static Logger getLogger() {
+		// TODO Auto-generated method stub
+		return LOGGER;
 	}
 }

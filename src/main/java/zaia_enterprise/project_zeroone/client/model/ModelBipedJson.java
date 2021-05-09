@@ -14,6 +14,8 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -127,22 +129,24 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
 
             // 塞入 Cube List
             for (CubesItem cubes : bones.getCubes()) {
+            	List<Float> uv = cubes.getUv();
                 List<Float> size = cubes.getSize();
                 boolean mirror = cubes.isMirror();
                 float inflate = cubes.getInflate();
-                model.addBox(convertOrigin(bones, cubes, 0), convertOrigin(bones, cubes, 1), convertOrigin(bones, cubes, 2),
+                model.texOffs(uv.get(0).intValue(), uv.get(1).intValue()).addBox(convertOrigin(bones, cubes, 0), convertOrigin(bones, cubes, 1), convertOrigin(bones, cubes, 2),
                         size.get(0), size.get(1), size.get(2), inflate, mirror);
             }
         }
     }
 
-//    @Override
-//    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-//        for (ModelRenderer model : getShouldRender()) {
-//            model.render(scale);
-//        }
-//    }
-
+	@Override
+	public void renderToBuffer(MatrixStack p_225598_1_, IVertexBuilder p_225598_2_, int p_225598_3_, int p_225598_4_,
+			float p_225598_5_, float p_225598_6_, float p_225598_7_, float p_225598_8_) {
+        for (ModelRenderer model : shouldRender) {
+            model.render(p_225598_1_, p_225598_2_, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        }
+	}
+    
     private void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.xRot = x;
         modelRenderer.yRot = y;

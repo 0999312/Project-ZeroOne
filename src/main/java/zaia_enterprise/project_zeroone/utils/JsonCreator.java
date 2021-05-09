@@ -11,7 +11,7 @@ import java.io.*;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class JSON_Creator {
+public class JsonCreator {
 	public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	
 	
