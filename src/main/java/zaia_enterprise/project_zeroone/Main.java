@@ -2,6 +2,7 @@ package zaia_enterprise.project_zeroone;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import zaia_enterprise.project_zeroone.item.ItemRegister;
+import zaia_enterprise.project_zeroone.utils.ClientUtil;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,6 +42,8 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(this);
 		
 		ItemRegister.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		
+		
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
@@ -50,7 +54,7 @@ public class Main {
 
 	@SuppressWarnings("resource")
 	private void doClientStuff(final FMLClientSetupEvent event) {
-		// do something that can only be done on the client
+		ClientUtil.loadModel(new ResourceLocation("project_zeroone", "models/entity/test_armor.json"));
 		LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
 	}
 

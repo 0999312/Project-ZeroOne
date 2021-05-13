@@ -41,7 +41,7 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
      * 哪些模型需要渲染。加载进父骨骼的子骨骼是不需要渲染的
      */
     protected final List<ModelRenderer> shouldRender = Lists.newLinkedList();
-
+    
     public ModelBipedJson(CustomModelPOJO pojo) {
     	super(1F);
         // 材质的长度、宽度
@@ -148,7 +148,7 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
         }
 	}
     
-    private void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.xRot = x;
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;

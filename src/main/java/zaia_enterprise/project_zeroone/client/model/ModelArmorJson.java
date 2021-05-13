@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import zaia_enterprise.project_zeroone.client.model.pojo.CustomModelPOJO;
 
 public class ModelArmorJson extends ModelBipedJson {
-
+	
 	public ModelArmorJson(CustomModelPOJO pojo) {
 		super(pojo);
     	this.leftArm.setPos(0, 0, 0);
