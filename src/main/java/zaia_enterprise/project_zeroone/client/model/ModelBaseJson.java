@@ -111,50 +111,11 @@ public class ModelBaseJson extends Model {
         }
     }
 
-//    @Override
-//    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-
-//    }
-
     private void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.xRot = x;
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;
     }
-
-    public boolean hasBackpackPositioningModel() {
-        return modelMap.get("backpackPositioningBone") != null;
-    }
-
-    public ModelRenderer getBackpackPositioningModel() {
-        return modelMap.get("backpackPositioningBone");
-    }
-
-//    public boolean hasArmPositioningModel(EnumHandSide side) {
-//        ModelRenderer arm = (side == EnumHandSide.LEFT ? modelMap.get("armLeftPositioningBone") : modelMap.get("armRightPositioningBone"));
-//        return arm != null;
-//    }
-//
-//    public void postRenderArmPositioningModel(float scale, EnumHandSide side) {
-//        ModelRenderer arm = (side == EnumHandSide.LEFT ? modelMap.get("armLeftPositioningBone") : modelMap.get("armRightPositioningBone"));
-//        if (arm != null) {
-//            arm.postRender(scale);
-//        }
-//    }
-//
-//    public void postRenderArm(float scale, EnumHandSide side) {
-//        ModelRenderer arm = (side == EnumHandSide.LEFT ? modelMap.get("armLeft") : modelMap.get("armRight"));
-//        if (arm != null) {
-//            arm.postRender(scale);
-//        }
-//    }
-//
-//    public void postRenderCustomHead(float scale) {
-//        ModelRenderer customHead = modelMap.get("head");
-//        if (customHead != null) {
-//            customHead.postRender(scale);
-//        }
-//    }
 
     /**
      * 基岩版的旋转中心计算方式和 Java 版不太一样，需要进行转换

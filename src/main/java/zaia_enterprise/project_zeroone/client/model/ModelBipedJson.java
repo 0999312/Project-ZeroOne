@@ -12,11 +12,7 @@ import zaia_enterprise.project_zeroone.client.model.pojo.CustomModelPOJO;
 
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,8 +35,9 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
     protected final HashMap<String, BonesItem> indexBones = Maps.newHashMap();
     /**
      * 哪些模型需要渲染。加载进父骨骼的子骨骼是不需要渲染的
+     * 大概用不着这个，所以注释掉了。
      */
-    protected final List<ModelRenderer> shouldRender = Lists.newLinkedList();
+//    protected final List<ModelRenderer> shouldRender = Lists.newLinkedList();
     
     public ModelBipedJson(CustomModelPOJO pojo) {
     	super(1F);
@@ -84,7 +81,6 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
             @Nullable String parent = bones.getParent();
             // 塞进 HashMap 里面的模型对象
             ModelRenderer model = modelMap.get(name);
-
             // 镜像参数
             model.mirror = bones.isMirror();
 
@@ -94,16 +90,10 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
             if (rotation != null) {
                 setRotationAngle(model, convertRotation(rotation.get(0)), convertRotation(rotation.get(1)), convertRotation(rotation.get(2)));
             }
-
-            getShouldRender().add(this.head);
-            getShouldRender().add(this.body);
-            getShouldRender().add(this.rightArm);
-            getShouldRender().add(this.leftArm);
-            getShouldRender().add(this.rightLeg);
-            getShouldRender().add(this.leftLeg);
             
             // Null 检查，进行父骨骼绑定，Biped模型需要绑定ModelBiped的模型，位置硬编码
             // 放过我愚蠢的else-if吧——射命丸
+            // 四肢的旋转点清空并跟随父模型坐标。
             if (parent != null) {
                 modelMap.get(parent).addChild(model);
             }else if(name.equals("head")||name.equals("bipedHead")){
@@ -111,16 +101,17 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
             }else if(name.equals("body")||name.equals("bipedBody")){
             	this.body.addChild(model);
             }else if(name.equals("armRight")||name.equals("bipedRightArm")){
+            	model.setPos(0, 0, 0);
             	this.rightArm.addChild(model);
             }else if(name.equals("armLeft")||name.equals("bipedLeftArm")){
+            	model.setPos(0, 0, 0);
             	this.leftArm.addChild(model);
             }else if(name.equals("legRight")||name.equals("bipedRightLeg")){
+            	model.setPos(0, 0, 0);
             	this.rightLeg.addChild(model);
             }else if(name.equals("legLeft")||name.equals("bipedLeftLeg")){
+            	model.setPos(0, 0, 0);
             	this.leftLeg.addChild(model);
-            } else {
-                // 没有父骨骼的模型才进行渲染
-                getShouldRender().add(model);
             }
             
             // 我的天，Cubes 还能为空……
@@ -139,54 +130,12 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
             }
         }
     }
-
-	@Override
-	public void renderToBuffer(MatrixStack p_225598_1_, IVertexBuilder p_225598_2_, int p_225598_3_, int p_225598_4_,
-			float p_225598_5_, float p_225598_6_, float p_225598_7_, float p_225598_8_) {
-        for (ModelRenderer model : shouldRender) {
-            model.render(p_225598_1_, p_225598_2_, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
-        }
-	}
     
     public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.xRot = x;
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;
     }
-
-    public boolean hasBackpackPositioningModel() {
-        return modelMap.get("backpackPositioningBone") != null;
-    }
-
-    public ModelRenderer getBackpackPositioningModel() {
-        return modelMap.get("backpackPositioningBone");
-    }
-
-//    public boolean hasArmPositioningModel(EnumHandSide side) {
-//        ModelRenderer arm = (side == EnumHandSide.LEFT ? modelMap.get("armLeftPositioningBone") : modelMap.get("armRightPositioningBone"));
-//        return arm != null;
-//    }
-//
-//    public void postRenderArmPositioningModel(float scale, EnumHandSide side) {
-//        ModelRenderer arm = (side == EnumHandSide.LEFT ? modelMap.get("armLeftPositioningBone") : modelMap.get("armRightPositioningBone"));
-//        if (arm != null) {
-//            arm.postRender(scale);
-//        }
-//    }
-//
-//    public void postRenderArm(float scale, EnumHandSide side) {
-//        ModelRenderer arm = (side == EnumHandSide.LEFT ? modelMap.get("armLeft") : modelMap.get("armRight"));
-//        if (arm != null) {
-//            arm.postRender(scale);
-//        }
-//    }
-//
-//    public void postRenderCustomHead(float scale) {
-//        ModelRenderer customHead = modelMap.get("head");
-//        if (customHead != null) {
-//            customHead.postRender(scale);
-//        }
-//    }
 
     /**
      * 基岩版的旋转中心计算方式和 Java 版不太一样，需要进行转换
@@ -237,7 +186,4 @@ public class ModelBipedJson extends BipedModel<LivingEntity> {
         return (float) (degree * Math.PI / 180);
     }
 
-	public List<ModelRenderer> getShouldRender() {
-		return shouldRender;
-	}
 }

@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.Model;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -84,8 +85,8 @@ public class ClientUtil {
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public static BipedModel<?> getArmorModelFromJSON(ResourceLocation modelLocation) {
-		ModelArmorJson model = new ModelArmorJson(getModelPOJO(modelLocation));
+	public static BipedModel<?> getArmorModelFromJSON(ResourceLocation modelLocation,EquipmentSlotType slot) {
+		ModelArmorJson model = new ModelArmorJson(getModelPOJO(modelLocation),slot);
 		return model;
 	}
 	
