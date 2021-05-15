@@ -24,4 +24,12 @@ public class CustomAnimationPOJO {
 		return "CustomAnimationPOJO{" + "format_version = '" + formatVersion + '\'' + ",animations = '" + animations
 				+ '\'' + "}";
 	}
+
+	public void setFormatVersion(String formatVersion) {
+		this.formatVersion = formatVersion;
+	}
+
+	public void setAnimations(HashMap<String, Animations> animations) {
+		this.animations = animations;
+	}
 }

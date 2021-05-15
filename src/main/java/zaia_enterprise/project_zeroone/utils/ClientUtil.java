@@ -22,6 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import zaia_enterprise.project_zeroone.Main;
+import zaia_enterprise.project_zeroone.client.animation.pojo.CustomAnimationPOJO;
 import zaia_enterprise.project_zeroone.client.model.ModelArmorJson;
 import zaia_enterprise.project_zeroone.client.model.ModelBaseJson;
 import zaia_enterprise.project_zeroone.client.model.ModelBipedJson;
@@ -31,7 +32,42 @@ import zaia_enterprise.project_zeroone.client.model.pojo.CustomModelPOJO;
 public class ClientUtil {
 	public static final HashMap<ResourceLocation, CustomModelPOJO> MODEL_MAP = Maps.newHashMap();
 	
+	public static final HashMap<ResourceLocation, CustomAnimationPOJO> ANIMATION_MAP = Maps.newHashMap();
+	
 	private static IResourceManager manager = Minecraft.getInstance().getResourceManager();
+	
+	@Nullable
+	@OnlyIn(Dist.CLIENT)
+	public static void loadAnimation(ResourceLocation modelLocation) {
+		InputStream input = null;
+		try {
+			input = manager.getResource(modelLocation).getInputStream();
+			CustomAnimationPOJO pojo = JsonCreator.gson.fromJson(new InputStreamReader(input, StandardCharsets.UTF_8),
+					CustomAnimationPOJO.class);
+
+//			// 先判断是不是 1.10.0 版本基岩版动画文件
+//			if (!pojo.getFormatVersion().equals("1.10.0")) {
+//				Main.getLogger().warn("{} animation version is not 1.10.0", modelLocation);
+//				
+//				return;
+//			}
+
+			// 如果 model 字段不为空
+			if (pojo.getAnimations() != null) {
+				ANIMATION_MAP.put(modelLocation, pojo);
+				return;
+			}
+			// 否则日志给出提示
+			Main.getLogger().warn("{} have no animation.", modelLocation);
+		} catch (IOException ioe) {
+			// 可能用来判定错误，打印下
+			Main.getLogger().warn("Failed to load animation: {}", modelLocation);
+			ioe.printStackTrace();
+		} finally {
+			// 关闭输入流
+			IOUtils.closeQuietly(input);
+		}
+	}
 	
 	@Nullable
 	@OnlyIn(Dist.CLIENT)
@@ -52,6 +88,7 @@ public class ClientUtil {
 			// 如果 model 字段不为空
 			if (pojo.getGeometryModel() != null) {
 				MODEL_MAP.put(modelLocation, pojo);
+				return;
 			}
 			// 否则日志给出提示
 			Main.getLogger().warn("{} model file don't have model field", modelLocation);
@@ -73,6 +110,13 @@ public class ClientUtil {
 	}
 	
 	@OnlyIn(Dist.CLIENT)
+	public static CustomAnimationPOJO getAnimaionPOJO(ResourceLocation modelLocation) {
+		if(ANIMATION_MAP.containsKey(modelLocation))
+			return ANIMATION_MAP.get(modelLocation);
+		return null;
+	}
+	
+	@OnlyIn(Dist.CLIENT)
 	public static Model getModelBaseFromJSON(ResourceLocation modelLocation) {
 		Model model = new ModelBaseJson(getModelPOJO(modelLocation));
 		return model;
@@ -90,4 +134,5 @@ public class ClientUtil {
 		return model;
 	}
 	
+
 }

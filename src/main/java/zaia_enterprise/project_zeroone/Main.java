@@ -16,6 +16,7 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import zaia_enterprise.project_zeroone.item.ItemRegister;
 import zaia_enterprise.project_zeroone.utils.ClientUtil;
+import zaia_enterprise.project_zeroone.utils.MathUtil;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,6 +56,8 @@ public class Main {
 	@SuppressWarnings("resource")
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		ClientUtil.loadModel(new ResourceLocation("project_zeroone", "models/entity/test_armor.json"));
+		ClientUtil.loadAnimation(new ResourceLocation("project_zeroone", "animations/henshin2.animation.json"));
+//		new CodeTesting();
 		LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
 	}
 

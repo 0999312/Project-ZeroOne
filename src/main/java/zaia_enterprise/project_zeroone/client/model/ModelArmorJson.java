@@ -20,6 +20,7 @@ public class ModelArmorJson extends ModelBipedJson {
 		// TODO: 这里需要调整下裤子和靴子的渲染哦。
 		super.renderToBuffer(ms, buffer, light, overlay, r, g, b, a);
 	}
+	
 	@Override
 	public void setupAnim(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks,
 			float netHeadYaw, float headPitch) {

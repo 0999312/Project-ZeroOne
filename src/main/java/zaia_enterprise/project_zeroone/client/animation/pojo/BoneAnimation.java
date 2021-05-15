@@ -7,23 +7,43 @@ import com.google.gson.annotations.SerializedName;
 
 public class BoneAnimation {
 	@SerializedName("rotation")
-	private HashMap<Integer,List<String>> rotation;
+	private HashMap<Double,List<String>> rotation;
 	
 	@SerializedName("position")
-	private HashMap<Integer,List<String>> position;
+	private HashMap<Double,List<String>> position;
 	
 	@SerializedName("scale")
-	private HashMap<Integer,List<String>> scale;
+	private HashMap<Double,List<String>> scale;
 
-	public HashMap<Integer, List<String>> getRotation() {
+	public HashMap<Double, List<String>> getRotation() {
 		return rotation;
 	}
 
-	public HashMap<Integer, List<String>> getPosition() {
+	public HashMap<Double, List<String>> getPosition() {
 		return position;
 	}
 
-	public HashMap<Integer, List<String>> getScale() {
+	public HashMap<Double, List<String>> getScale() {
 		return scale;
+	}
+
+	public void setRotation(HashMap<Double, List<String>> rotation) {
+		this.rotation = rotation;
+	}
+
+	public void setPosition(HashMap<Double, List<String>> position) {
+		this.position = position;
+	}
+
+	public void setScale(HashMap<Double, List<String>> scale) {
+		this.scale = scale;
+	}
+	@Override
+	public String toString() {
+		return "BoneAnimation{"+
+		"rotation = '"+rotation+ '\'' +
+		",position = '"+position+ '\'' +
+		",scale = '"+scale+ '\'' + "}"
+		;
 	}
 }

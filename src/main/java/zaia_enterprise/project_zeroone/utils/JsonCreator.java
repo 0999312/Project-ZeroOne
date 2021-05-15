@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 public class JsonCreator {
 	public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	
-	
 	public static void genLangForItems(Item... items){
 		File fileDir = new File("json_create\\lang\\");
         if(!fileDir.exists()){
@@ -173,18 +172,15 @@ public class JsonCreator {
             jw.name("model").value(modId + ":" + blockName+"_slice1");
             jw.endObject();
 
-
             jw.name("bites=2");
             jw.beginObject();
             jw.name("model").value(modId + ":" + blockName+"_slice2");
             jw.endObject();
 
-
             jw.name("bites=3");
             jw.beginObject();
             jw.name("model").value(modId + ":" + blockName+"_slice3");
             jw.endObject();
-
 
             jw.name("bites=4");
             jw.beginObject();
