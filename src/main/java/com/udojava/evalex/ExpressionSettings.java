@@ -20,7 +20,7 @@ public class ExpressionSettings {
      */
     private int powerOperatorPrecedence;
 
-    private ExpressionSettings() {
+	private ExpressionSettings() {
         // hide default constructor
     }
 

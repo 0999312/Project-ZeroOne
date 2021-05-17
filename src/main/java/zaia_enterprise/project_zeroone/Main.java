@@ -16,8 +16,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import zaia_enterprise.project_zeroone.item.ItemRegister;
 import zaia_enterprise.project_zeroone.utils.ClientUtil;
-import zaia_enterprise.project_zeroone.utils.MathUtil;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

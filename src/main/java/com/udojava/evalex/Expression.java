@@ -392,9 +392,8 @@ public class Expression {
         private char peekNextChar() {
             if (pos < (input.length() - 1)) {
                 return input.charAt(pos + 1);
-            } else {
-                return 0;
             }
+			return 0;
         }
 
         private boolean isHexDigit(char ch) {
@@ -1286,10 +1285,9 @@ public class Expression {
                     if (stack.isEmpty()) {
                         if (lastFunction == null) {
                             throw new ExpressionException("Unexpected comma", token.pos);
-                        } else {
-                            throw new ExpressionException(
-                                    "Parse error for function " + lastFunction, token.pos);
                         }
+						throw new ExpressionException(
+						        "Parse error for function " + lastFunction, token.pos);
                     }
                     break;
                 case OPERATOR: {
@@ -1580,7 +1578,8 @@ public class Expression {
      * @param operator The operator to add.
      * @return The previous operator with that name, or <code>null</code> if there was none.
      */
-    public <OPERATOR extends LazyOperator> OPERATOR addOperator(OPERATOR operator) {
+    @SuppressWarnings("unchecked")
+	public <OPERATOR extends LazyOperator> OPERATOR addOperator(OPERATOR operator) {
         String key = operator.getOper();
         if (operator instanceof AbstractUnaryOperator) {
             key += "u";
@@ -1954,9 +1953,8 @@ public class Expression {
         Expression that = (Expression) o;
         if (this.expressionString == null) {
             return that.expressionString == null;
-        } else {
-            return this.expressionString.equals(that.expressionString);
         }
+		return this.expressionString.equals(that.expressionString);
     }
 
     /**
