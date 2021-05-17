@@ -1,7 +1,5 @@
 package zaia_enterprise.project_zeroone.utils;
 
-import com.udojava.evalex.Expression;
-
 public class MathUtil {
 	public static double convertTicksToSeconds(double ticks) {
 		return ticks / 20;
@@ -20,9 +18,5 @@ public class MathUtil {
 	public static double lerp(double pct, double start, double end) {
 		return start + pct * (end - start);
 	}
-	
-	public static double string2value(String value) {
-		Expression expression = new Expression(value);
-		return expression.eval().doubleValue();
-	}
+
 }
