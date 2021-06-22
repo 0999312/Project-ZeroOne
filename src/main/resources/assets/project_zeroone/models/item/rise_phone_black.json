@@ -1,0 +1,18 @@
+{
+   "parent" : "project_zeroone:item/rise_phone",
+   "textures" : {
+      "0" : "project_zeroone:items/rise_phone_black"
+   },
+   "overrides" : [
+      {
+         "predicate" : {
+            "project_zeroone:opened" : 1
+         },
+         "model" : "project_zeroone:item/rise_phone_screen_on",
+         "textures" : {
+		"0": "project_zeroone:items/rise_phone_black",
+		"1": "project_zeroone:items/rise_phone_screen"
+         }
+      }
+   ]
+}

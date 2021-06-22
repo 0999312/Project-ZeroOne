@@ -1,0 +1,6 @@
+{
+  "parent": "project_zeroone:item/progrise_key_basic",
+  "textures": {
+    "0": "project_zeroone:items/punching_kong"
+  }
+}
