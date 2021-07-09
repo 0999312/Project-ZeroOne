@@ -28,6 +28,7 @@ public class RisePhone extends Item {
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack stack = player.getItemInHand(hand);
+		Main.getLogger().info("player: " + player.yRot);
 		if(isOpened(stack)) {
 			setOpened(stack, false);
 			return ActionResult.consume(stack);

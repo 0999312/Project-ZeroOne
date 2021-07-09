@@ -31,6 +31,10 @@ public class Research {
 		return key;
 	}
 
+	public String getInfo() {
+		return info;
+	}
+
 //	public List<String> getParents() {
 //		return parents;
 //	}
