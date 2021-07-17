@@ -11,6 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import zaia_enterprise.project_zeroone.entity.EntityRegister;
 import zaia_enterprise.project_zeroone.item.ItemRegister;
 import zaia_enterprise.project_zeroone.item.ZeroOneGroup;
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +40,7 @@ public class Main {
 		
 		ItemRegister.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		
-		
+		EntityRegister.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
@@ -48,7 +49,9 @@ public class Main {
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		ClientUtil.loadModel(new ResourceLocation(Versions.MODID, "models/entity/security_izu.json"));
-		ClientUtil.loadModel(new ResourceLocation(Versions.MODID, "models/entity/test_armor.json"));
+		ClientUtil.loadModel(new ResourceLocation(Versions.MODID, "models/entity/security_shesta.json"));
+		ClientUtil.loadModel(new ResourceLocation(Versions.MODID, "models/entity/rise_hopper.json"));
+		ClientUtil.loadModel(new ResourceLocation(Versions.MODID, "models/entity/test_model.json"));
 	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -65,18 +68,6 @@ public class Main {
 	public void onServerStarting(FMLServerStartingEvent event) {
 		// do something when the server starts
 	}
-
-//	// You can use EventBusSubscriber to automatically subscribe events on the
-//	// contained class (this is subscribing to the MOD
-//	// Event bus for receiving Registry Events)
-//	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-//	public static class RegistryEvents {
-//		@SubscribeEvent
-//		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-//			// register a new block here
-//			LOGGER.info("HELLO from Register Block");
-//		}
-//	}
 
 	public static Logger getLogger() {
 		// TODO Auto-generated method stub

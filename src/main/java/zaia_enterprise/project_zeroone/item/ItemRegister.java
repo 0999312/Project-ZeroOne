@@ -3,7 +3,6 @@ package zaia_enterprise.project_zeroone.item;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -12,28 +11,30 @@ import zaia_enterprise.project_zeroone.Versions;
 
 public class ItemRegister {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Versions.MODID);
-	public static final RegistryObject<Item> testItem = ITEMS.register("test_armor",
-			() -> new ArmorTest(ArmorMaterial.TURTLE, EquipmentSlotType.HEAD,
-					(new Item.Properties()).tab(ItemGroup.TAB_COMBAT)));
-	public static final RegistryObject<Item> testItem1 = ITEMS.register("test_armor1",
-			() -> new ArmorTest(ArmorMaterial.TURTLE, EquipmentSlotType.CHEST,
-					(new Item.Properties()).tab(ItemGroup.TAB_COMBAT)));
-	public static final RegistryObject<Item> testItem2 = ITEMS.register("test_armor2",
-			() -> new ArmorTest(ArmorMaterial.TURTLE, EquipmentSlotType.LEGS,
-					(new Item.Properties()).tab(ItemGroup.TAB_COMBAT)));
-	public static final RegistryObject<Item> testItem3 = ITEMS.register("test_armor3",
-			() -> new ArmorTest(ArmorMaterial.TURTLE, EquipmentSlotType.FEET,
-					(new Item.Properties()).tab(ItemGroup.TAB_COMBAT)));
 
-	public static final RegistryObject<Item> izu_1 = ITEMS.register("izu_1",
+	public static final RegistryObject<Item> test_item = ITEMS.register("test_item",
+			ItemHumagearModule::new);
+	
+	public static final RegistryObject<Item> izu_1 = ITEMS.register("izu_cloth",
 			() -> new ArmorSecurity(ArmorMaterial.LEATHER, EquipmentSlotType.CHEST,
 					(new Item.Properties()).tab(Main.ZERO_ONE_GROUP)));
-	public static final RegistryObject<Item> izu_2 = ITEMS.register("izu_2",
+	public static final RegistryObject<Item> izu_2 = ITEMS.register("izu_pants",
 			() -> new ArmorSecurity(ArmorMaterial.LEATHER, EquipmentSlotType.LEGS,
 					(new Item.Properties()).tab(Main.ZERO_ONE_GROUP)));
-	public static final RegistryObject<Item> izu_3 = ITEMS.register("izu_3",
+	public static final RegistryObject<Item> izu_3 = ITEMS.register("izu_shoes",
 			() -> new ArmorSecurity(ArmorMaterial.LEATHER, EquipmentSlotType.FEET,
 					(new Item.Properties()).tab(Main.ZERO_ONE_GROUP)));
+	
+	public static final RegistryObject<Item> shesta_1 = ITEMS.register("shesta_cloth",
+			() -> new ArmorSecurity2(ArmorMaterial.LEATHER, EquipmentSlotType.CHEST,
+					(new Item.Properties()).tab(Main.ZERO_ONE_GROUP)));
+	public static final RegistryObject<Item> shesta_2 = ITEMS.register("shesta_pants",
+			() -> new ArmorSecurity2(ArmorMaterial.LEATHER, EquipmentSlotType.LEGS,
+					(new Item.Properties()).tab(Main.ZERO_ONE_GROUP)));
+	public static final RegistryObject<Item> shesta_3 = ITEMS.register("shesta_shoes",
+			() -> new ArmorSecurity2(ArmorMaterial.LEATHER, EquipmentSlotType.FEET,
+					(new Item.Properties()).tab(Main.ZERO_ONE_GROUP)));
+
 
 	public static final RegistryObject<Item> risingHopperKey = ITEMS.register("rising_hopper_progrise_key",
 			() -> new ProgriseKey(new Item.Properties().stacksTo(1).tab(Main.ZERO_ONE_GROUP)));
